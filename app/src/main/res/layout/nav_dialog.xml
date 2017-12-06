@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chujing_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_d_title"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/nav_yes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+             />
+
+        <TextView
+            android:id="@+id/nav_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+             />
+    </LinearLayout>
+
+</RelativeLayout>

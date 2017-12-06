@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:divider="@drawable/linearlayout_vertical_divider"
+    app:showDividers="middle"
+    tools:context="com.deilsky.conciseDialogSimple.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_default"
+        android:gravity="center"
+        android:text="默认"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_top"
+        android:gravity="center"
+        android:text="顶部"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_bottom"
+        android:gravity="center"
+        android:text="底部"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_default_match"
+        android:gravity="center"
+        android:text="默认宽度全屏"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_top_match"
+        android:gravity="center"
+        android:text="顶部宽度全屏"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_bottom_match"
+        android:gravity="center"
+        android:text="底部宽度全屏"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_simple"
+        android:gravity="center"
+        android:text="组合"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>
