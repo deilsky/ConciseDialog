@@ -58,6 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
+    <TextView
+        android:id="@+id/tv_simple2"
+        android:gravity="center"
+        android:text="组合"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
 
 
 

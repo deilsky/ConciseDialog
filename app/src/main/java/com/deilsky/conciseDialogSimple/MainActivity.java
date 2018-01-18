@@ -128,7 +128,27 @@ public class MainActivity extends AppCompatActivity {
                 })
                         .matchWidth(true)
                         .gravity(ConciseDialog.DialogGravity.BOTTOM)
-                        .height(5)//高度 百分比
+                        .height(0.8)//高度 百分比
+                        .show(MainActivity.this.getFragmentManager(), "test1");
+            }
+        });
+        findViewById(R.id.tv_simple2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConciseDialog.newInstance(R.layout.nav_dialog, new ConciseDialog.ReadyListener() {
+                    @Override
+                    public void onComplete(View view) {
+                        initDialogView(view);
+                    }
+
+                    @Override
+                    public void onError(String e) {
+
+                    }
+                })
+                        .gravity(ConciseDialog.DialogGravity.BOTTOM)
+                        .height(0.8)//高度 百分比
+                        .width(0.8)
                         .show(MainActivity.this.getFragmentManager(), "test1");
             }
         });

@@ -1,16 +1,15 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
-
+    buildToolsVersion "26.0.2"
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
 
     }
     buildTypes {
@@ -19,13 +18,48 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    allprojects {
+        repositories {
+            mavenLocal()
+            jcenter()
+        }
+        //加上这些
+        tasks.withType(Javadoc) {
+            options {
+                encoding "UTF-8"
+                charSet 'UTF-8'
+                links "http://docs.oracle.com/javase/8/docs/api"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    publish {
+        repoName = 'ConciseDialog'//仓库名
+        userOrg = 'deilsky'      //bintray注册的用户名
+        groupId = 'com.deilsky'         //compile引用时的第1部分groupId
+        artifactId = 'ConciseDialog'     //compile引用时的第2部分项目名
+        publishVersion = '1.0.4'    //compile引用时的第3部分版本号
+        desc = 'ConciseDialog'//d项目描述
+        repoName = "ConciseDialog" //你的仓库名称，没有填写默认仓库是maven//这也是很多人上传仓库不对名问题最多情况，
+        website = 'https://github.com/deilsky/ConciseDialogSimple' //github 托管地址
+    }
+
+
+
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
 }

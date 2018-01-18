@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +34,13 @@ public class ConciseDialog extends DialogFragment {
     private ReadyListener readyListener;
     private DialogGravity gravity;
     private boolean matchWidth = false;
-    private int height = 3;
+    private double height = 0.5f;
+    private double width = 0.8f;
 
     /**
      * @param id            布局文件ID
      * @param readyListener 布局初始化完成回调
-     * @return
+     * @return ConciseDialog
      */
     public static ConciseDialog newInstance(@LayoutRes int id, ReadyListener readyListener) {
         ConciseDialog dialog = new ConciseDialog();
@@ -57,7 +57,7 @@ public class ConciseDialog extends DialogFragment {
 
     /**
      * @param gravity Dialog位置 TOP, MIDDLE, BOTTOM 对应 上，中，下 默认 MIDDLE
-     * @return
+     * @return ConciseDialog
      */
     public ConciseDialog gravity(DialogGravity gravity) {
         this.gravity = gravity;
@@ -66,7 +66,7 @@ public class ConciseDialog extends DialogFragment {
 
     /**
      * @param is 宽度最大化 默认 系统Dialog 宽度
-     * @return
+     * @return ConciseDialog
      */
     public ConciseDialog matchWidth(boolean is) {
         this.matchWidth = is;
@@ -74,11 +74,20 @@ public class ConciseDialog extends DialogFragment {
     }
 
     /**
-     * @param height Dialog 高度 默认 3 屏幕高度1/3
-     * @return
+     * @param height Dialog 高度 默认 0.5 屏幕高度50%
+     * @return ConciseDialog
      */
-    public ConciseDialog height(int height) {
+    public ConciseDialog height(double height) {
         this.height = height;
+        return this;
+    }
+
+    /**
+     * @param width Dialog 宽度 默认 0.8 屏幕宽度80%
+     * @return ConciseDialog
+     */
+    public ConciseDialog width(double width) {
+        this.width = width;
         return this;
     }
 
@@ -97,8 +106,6 @@ public class ConciseDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("onCreateView", layoutId + "");
-        //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(layoutId, null);
         readyListener.onComplete(view);
         return view;
@@ -119,8 +126,10 @@ public class ConciseDialog extends DialogFragment {
         dialogWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         if (matchWidth) {
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        } else {
+            layoutParams.width = (int) (dm.widthPixels * width);
         }
-        layoutParams.height = dm.heightPixels / height;
+        layoutParams.height = (int) (dm.heightPixels * height);
         switch (gravity) {
             case TOP:
                 dialogWindow.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
