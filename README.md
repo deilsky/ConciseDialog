@@ -2,7 +2,7 @@
 A clean Dialog
 # How to user ?
 ## first
-  compile 'com.deilsky:ConciseDialog:1.0.2'
+  compile 'com.deilsky:ConciseDialog:1.0.6'
 ## second
 ```
   private void initDialogView(final View v, String str) {
@@ -37,7 +37,7 @@ A clean Dialog
     })
       .gravity(ConciseDialog.DialogGravity.BOTTOM)//显示位置 默认居中
       .matchWidth(true)//宽度是否全屏
-      .height(5)//高度 屏幕高度1/5 默认1/3
+      .height(0.5)//高度 屏幕高度10
       .show(MainActivity.this.getFragmentManager(), "test1");
 ```
 ## 简单封装，适用大多数场合。
