@@ -127,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                         .matchWidth(true)
-                        .gravity(ConciseDialog.DialogGravity.BOTTOM)
-                        .height(0.8)//高度 百分比
+                        .gravity(ConciseDialog.DialogGravity.MIDDLE)
+                        .absolute(true)
+                        .height(80)//高度 百分比
                         .show(MainActivity.this.getFragmentManager(), "test1");
             }
         });
@@ -147,8 +148,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                         .gravity(ConciseDialog.DialogGravity.BOTTOM)
-                        .height(0.8)//高度 百分比
-                        .width(0.8)
+                        .absolute(true)
+                        .matchWidth(false)
+                        .height(160)//高度 百分比
+                        .width(150)
                         .show(MainActivity.this.getFragmentManager(), "test1");
             }
         });

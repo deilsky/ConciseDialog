@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +35,11 @@ public class ConciseDialog extends DialogFragment {
     private ReadyListener readyListener;
     private DialogGravity gravity;
     private boolean matchWidth = false;
-    private double height = 0.5f;
-    private double width = 0.8f;
+    private double height = 0.3;
+    private double width = 0.8;
+    private int absoluteWidth = 200;
+    private int absoluteHeight = 200;
+    private boolean absolute = false;
 
     /**
      * @param id            布局文件ID
@@ -52,6 +56,15 @@ public class ConciseDialog extends DialogFragment {
     public ConciseDialog createView(@LayoutRes int layoutId, ReadyListener readyListener) {
         this.layoutId = layoutId;
         this.readyListener = readyListener;
+        return this;
+    }
+
+    /**
+     * @param absolute 是否使用绝对尺寸，如使用绝对尺寸，宽/高 将使用dp作为单位
+     * @return ConciseDialog
+     */
+    public ConciseDialog absolute(boolean absolute) {
+        this.absolute = absolute;
         return this;
     }
 
@@ -83,11 +96,29 @@ public class ConciseDialog extends DialogFragment {
     }
 
     /**
+     * @param height Dialog 高度 默认 200dp
+     * @return ConciseDialog
+     */
+    public ConciseDialog height(int height) {
+        this.absoluteHeight = height;
+        return this;
+    }
+
+    /**
      * @param width Dialog 宽度 默认 0.8 屏幕宽度80%
      * @return ConciseDialog
      */
     public ConciseDialog width(double width) {
         this.width = width;
+        return this;
+    }
+
+    /**
+     * @param width Dialog 宽度 默认 0.8 屏幕宽度80%
+     * @return ConciseDialog
+     */
+    public ConciseDialog width(int width) {
+        this.absoluteWidth = width;
         return this;
     }
 
@@ -124,12 +155,22 @@ public class ConciseDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         dialogWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        if (matchWidth) {
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        if (absolute) {
+            if (matchWidth) {
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            } else {
+                layoutParams.width = measure(absoluteWidth);
+            }
+            layoutParams.height = measure(absoluteHeight);
         } else {
-            layoutParams.width = (int) (dm.widthPixels * width);
+            if (matchWidth) {
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            } else {
+                layoutParams.width = (int) (dm.widthPixels * width);
+            }
+            layoutParams.height = (int) (dm.heightPixels * height);
         }
-        layoutParams.height = (int) (dm.heightPixels * height);
+
         switch (gravity) {
             case TOP:
                 dialogWindow.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
@@ -142,5 +183,9 @@ public class ConciseDialog extends DialogFragment {
                 break;
         }
         dialogWindow.setAttributes(layoutParams);
+    }
+
+    private int measure(int value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 }
