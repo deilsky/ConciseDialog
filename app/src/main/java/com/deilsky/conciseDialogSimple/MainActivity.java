@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(String e) {
 
                     }
-                }).show(MainActivity.this.getFragmentManager(), "test1");
+                })
+                        .cancelable(false)
+                        .show(MainActivity.this.getFragmentManager(), "test1");
             }
         });
         findViewById(R.id.tv_top).setOnClickListener(new View.OnClickListener() {

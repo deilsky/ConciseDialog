@@ -40,6 +40,7 @@ public class ConciseDialog extends DialogFragment {
     private int absoluteWidth = 200;
     private int absoluteHeight = 200;
     private boolean absolute = false;
+    private boolean cancelable = false;
 
     /**
      * @param id            布局文件ID
@@ -122,6 +123,15 @@ public class ConciseDialog extends DialogFragment {
         return this;
     }
 
+    /**
+     * 替换 setCancelable 方法，实现同样功能
+     * @param cancelable true/false
+     * @return ConciseDialog
+     */
+    public ConciseDialog cancelable(boolean cancelable){
+        this.cancelable = cancelable;
+        return this;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -150,6 +160,7 @@ public class ConciseDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+        setCancelable(this.cancelable);
         Window dialogWindow = getDialog().getWindow();
         WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
         DisplayMetrics dm = new DisplayMetrics();
